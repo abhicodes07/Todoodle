@@ -1,0 +1,50 @@
+{% extends "app/layout.html" %}
+
+{% block content %}
+<section class=" mt-10 min-h-screen flex items-center justify-center px-6 py-8 mx-auto bg-cover bg-center bg-no-repeat"
+  style="background-image: url('https://images.unsplash.com/photo-1663947718652-fa32fb546da2?ixid=M3w4ODczOHwwfDF8cmFuZG9tfHx8fHx8fHx8MTczNjc3MTA1OXw&ixlib=rb-4.0.3&w=1536&h=864&dpr=1.25&auto=format&q=75&fit=crop')">
+  <div class="w-full max-w-lg bg-white rounded-lg shadow-lg border border-black p-8 bg-opacity-60">
+    <h1 class="text-2xl font-bold text-gray-900 mb-6 text-center">
+      Create an Account
+    </h1>
+
+    <form class="space-y-6" method="POST" autocomplete="off">
+      {% csrf_token %}
+
+      <div>
+
+        <label for="{{ form.username.id_for_label }}"
+          class="block mb-2 text-sm font-medium text-gray-900">Username</label>
+        {{ form.username }}
+
+      </div>
+
+      <div>
+
+        <label for="{{ form.password1.id_for_label }}"
+          class="block mb-2 text-sm font-medium text-gray-900">Password</label>
+        {{ form.password1 }}
+
+      </div>
+
+      <div>
+
+        <label for="{{ form.password1.id_for_label }}" class="block mb-2 text-sm font-medium text-gray-900">Confirm
+          Password</label>
+        {{ form.password2 }}
+
+      </div>
+
+      <button type="submit"
+        class="w-full bg-blue-600 text-white p-3 rounded-lg hover:bg-blue-700 focus:ring-4 focus:ring-blue-200 transition-all font-medium">
+        Create Account
+      </button>
+
+      <p class="text-sm text-gray-600 text-center">
+        Already have an account?
+        <a href="{% url 'login' %}" class="text-blue-600 hover:underline">Login here</a>
+      </p>
+    </form>
+  </div>
+</section>
+{% endblock content %}

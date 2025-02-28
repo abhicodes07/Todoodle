@@ -1,0 +1,29 @@
+{% extends "app/layout.html" %}
+
+{% block content %}
+<div class="container mx-auto">
+  <section class="flex items-center justify-center h-screen m-10">
+    <div>
+      <p id="text" class="text-2xl text-center">
+      </p>
+    </div>
+  </section>
+</div>
+
+<script>
+  const text = "Welcome to Todoodle, your simple yet powerful companion for staying organized and on top of your daily tasks. Designed with ease and efficiency in mind, our app helps you manage your to-dos effortlessly, whether it’s tackling work projects, keeping up with personal goals, or just remembering the little things. We’re here to streamline your day, so you can focus on what matters most—getting stuff done!"
+  let i = 0;
+  const speed = 50; // Speed in milliseconds per character
+
+  function typeWriter() {
+    if (i < text.length) {
+      document.getElementById("text").innerHTML += text.charAt(i);
+      i++;
+      setTimeout(typeWriter, speed);
+    }
+  }
+
+  // Start the animation when the page loads
+  window.onload = typeWriter;
+</script>
+{% endblock content %}

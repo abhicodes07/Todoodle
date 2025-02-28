@@ -1,0 +1,39 @@
+{% extends "app/layout.html" %}
+{% load static %}
+
+{% block content %}
+<div class="flex items-center justify-between min-h-screen">
+  <div class="w-1/2 flex justify-end text-left px-8">
+    <p class="text-7xl whitespace-pre-line">
+      &nbsp;
+      Welcome to the todoodle {% if user.is_authenticated %}dashboard,{% else %} app! {% endif %}
+      {% if user.is_authenticated %}<b>{{ user }}! </b>{% endif %}
+    </p>
+  </div>
+
+  <!-- Divider (Vertical Ruler) -->
+  <div class="w-10 border-l border-gray-700 h-64"></div>
+
+  <!-- Left Section (Button or Extra Content) -->
+  <div class="w-1/2 justify-center">
+    <p>Start creating todo's to streamline your day, so you can focus on what matters most—getting stuff done!</p>
+    {% if not user.is_authenticated %}
+    <button
+      class="flex mt-2 relative inline-flex items-center justify-center p-0.5 mb-2 me-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-purple-600 to-blue-500 group-hover:from-purple-600 group-hover:to-blue-500 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800">
+      <a href="{% url 'register' %}"
+        class="relative px-5 py-2.5 transition-all ease-in duration-75 bg-white rounded-md dark:bg-white">
+        Create an account
+      </a>
+    </button>
+    {% else %}
+    <button
+      class="flex mt-2 relative inline-flex items-center justify-center p-0.5 mb-2 me-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-purple-600 to-blue-500 group-hover:from-purple-600 group-hover:to-blue-500 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800">
+      <a href="{% url 'dashboard' %}"
+        class="relative px-5 py-2.5 transition-all ease-in duration-75 bg-white rounded-md dark:bg-white">
+        dashboard
+      </a>
+    </button>
+    {% endif %}
+  </div>
+</div>
+{% endblock content %}
