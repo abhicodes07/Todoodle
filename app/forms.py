@@ -69,7 +69,7 @@ class TodoForm(forms.ModelForm):
         widget=TextInput(
             attrs={
                 "class": "w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all",
-                "placeholder": "Enter your username",
+                "placeholder": "Enter title of todo",
             }
         )
     )
@@ -78,7 +78,7 @@ class TodoForm(forms.ModelForm):
         widget=TextInput(
             attrs={
                 "class": "w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all",
-                "placeholder": "Enter your username",
+                "placeholder": "Enter description",
             }
         ),
         max_length=400,
@@ -88,7 +88,7 @@ class TodoForm(forms.ModelForm):
         required=False,
         widget=ClearableFileInput(
             attrs={
-                "class": "w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all",
+                "class": "block w-full p-3 text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500",
                 "accept": "image/*",  # accept only image file
             }
         ),
@@ -109,7 +109,7 @@ class TaskForm(forms.ModelForm):
         widget=TextInput(
             attrs={
                 "class": "w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all",
-                "placeholder": "Enter your username",
+                "placeholder": "Enter title of task",
             }
         )
     )
