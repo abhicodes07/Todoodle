@@ -3,10 +3,9 @@
 
 {% block content %}
 
-{% for t in todos %}
-
 <section class="flex items-center justify-center h-screen"
-  style="background-image: url('https://images.unsplash.com/photo-1452392450884-d5fd51464e09?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');">
+  style="background-image: url('https://images.unsplash.com/photo-1461397932544-11132a69bf46?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D')">
+  >
   <!-- <div> -->
   <!--   <p id="text" class="text-2xl text-center"> -->
   <!--     {{ t.title }} -->
@@ -15,18 +14,36 @@
   <!--   </p> -->
   <!-- </div> -->
 
+  {% if user %}
 
-  <div class="max-w-sm bg-white border border-gray-200 rounded-lg shadow-sm dark:bg-gray-800 dark:border-gray-700">
+  {% for t in todos %}
+  <div class="max-w-sm bg-white border border-gray-200 rounded-lg shadow-sm dark:bg-gray-800 dark:border-gray-700 mx-8">
+    <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">{{ user }}</h5>
     <a href="#">
       <img class="rounded-t-lg" src="/docs/images/blog/image-1.jpg" alt="" />
     </a>
     <div class="p-5">
       <a href="#">
         <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Noteworthy technology
-          acquisitions 2021 {{t.title}}</h5>
+          acquisitions 2021 {{t.title}} {{ t.id }}</h5>
       </a>
+      <ul>
+        {% for task in todos.tasks.all %}
+        <li>
+          {{ task.title }} -
+          {% if task.completed %} ✅ Completed {% else %} ❌ Not Completed {% endif %}
+        </li>
+        {% empty %}
+        <p>No tasks added yet.</p>
+        {% endfor %}
+      </ul>
       <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">Here are the biggest enterprise technology
         acquisitions of 2021 so far, in reverse chronological order.</p>
+      <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">
+        {% for task in tasks %}
+        {{ task }}
+        {% endfor %}
+      </p>
       <a href="#"
         class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
         Read more
@@ -39,8 +56,42 @@
     </div>
   </div>
 
+  {% endfor %}
+
+  {% endif %}
+
 </section>
 
-{% endfor %}
-
+<!-- <div class="grid grid-cols-3 gap-4 m-4" style="border: 0px;"> -->
+<!--   <div class="max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700"> -->
+<!--     <a href="#"> -->
+<!--       <img class="rounded-t-lg" src="" alt="" /> -->
+<!--     </a> -->
+<!--     <div class="p-5"> -->
+<!--       <a href="#"> -->
+<!--         <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">{{tweet.user.username}}</h5> -->
+<!--       </a> -->
+<!--       <p class="mb-3 font-normal text-gray-700 dark:text-gray-400"></p> -->
+<!---->
+<!--       <a href="" -->
+<!--         class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"> -->
+<!--         Edit -->
+<!--         <svg class="rtl:rotate-180 w-3.5 h-3.5 ms-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" -->
+<!--           viewBox="0 0 14 10"> -->
+<!--           <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" -->
+<!--             d="M1 5h12m0 0L9 1m4 4L9 9" /> -->
+<!--         </svg> -->
+<!--       </a> -->
+<!--       <a href="" -->
+<!--         class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-red-700 rounded-lg hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800"> -->
+<!--         Delete -->
+<!--         {% comment %} <svg class="rtl:rotate-180 w-3.5 h-3.5 ms-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" -->
+<!--           fill="none" viewBox="0 0 14 10"> -->
+<!--           <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" -->
+<!--             d="M1 5h12m0 0L9 1m4 4L9 9" /> -->
+<!--         </svg> {% endcomment %} -->
+<!--       </a> -->
+<!--     </div> -->
+<!--   </div> -->
+<!-- </div> -->
 {% endblock content %}

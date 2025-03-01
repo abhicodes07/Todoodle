@@ -2,9 +2,9 @@ from django.contrib.auth import authenticate
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import auth
 from django.forms import Form
-from django.shortcuts import redirect, render
+from django.shortcuts import redirect, render, get_object_or_404
 
-from app.models import Todo
+from app.models import Task, Todo
 
 from .forms import CreateUserForm, LoginUserForm, TodoForm, TaskFromSet
 
@@ -51,7 +51,7 @@ def login_user(request):
 
 @login_required(login_url="login")
 def dashboard(request):
-    my_todos = Todo.objects.all()
+    my_todos = Todo.objects.filter(user=request.user)
     return render(request, "app/dashboard.html", context={"todos": my_todos})
 
 
@@ -73,7 +73,7 @@ def create_todo(request):
                 task.todo = todo  # link task to created todo
                 task.save()
 
-        # return redirect('dashboard')
+        return redirect("dashboard")
     return render(
         request, "app/create_todo.html", {"todo_form": todo_form, "formset": formset}
     )

@@ -1,9 +1,11 @@
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 from django.contrib.auth.models import User
 from django import forms
-from django.forms.widgets import PasswordInput, TextInput
+
+# ClearableFileInput for taking file inputs
+from django.forms.widgets import PasswordInput, TextInput, ClearableFileInput
 from .models import Todo, Task
-from django.forms import formset_factory, inlineformset_factory
+from django.forms import inlineformset_factory
 
 
 # register user
@@ -63,13 +65,41 @@ class LoginUserForm(AuthenticationForm):
 
 # todo form
 class TodoForm(forms.ModelForm):
+    title = forms.CharField(
+        widget=TextInput(
+            attrs={
+                "class": "w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all",
+                "placeholder": "Enter your username",
+            }
+        )
+    )
+
+    description = forms.CharField(
+        widget=TextInput(
+            attrs={
+                "class": "w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all",
+                "placeholder": "Enter your username",
+            }
+        ),
+        max_length=400,
+    )
+
+    image = forms.ImageField(
+        required=False,
+        widget=ClearableFileInput(
+            attrs={
+                "class": "w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all",
+                "accept": "image/*",  # accept only image file
+            }
+        ),
+    )
+
     class Meta:
         model = Todo
         fields = [
             "title",
             "description",
             "image",
-            "author",
         ]
 
 

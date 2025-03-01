@@ -1,0 +1,38 @@
+{% extends "app/layout.html" %}
+{% load static %}
+
+{% block content %}
+<form method="post" enctype="multipart/form-data">
+  {% csrf_token %}
+
+  {{ todo_form.as_p }}
+
+  <h3>Tasks:</h3>
+  <div id="task-formset">
+    {{ formset.management_form }}
+    {% for form in formset %}
+    <div class="task-form">
+      {{ form.as_p }}
+    </div>
+    {% endfor %}
+  </div>
+
+  <button type="button" id="add-task">Add Another Task</button>
+  <button type="submit">Create Todo</button>
+</form>
+
+<script>
+  document.getElementById("add-task").addEventListener("click", function () {
+    let totalForms = document.querySelector("#id_tasks-TOTAL_FORMS");
+    let formCount = Number(totalForms.value);
+    let formsetDiv = document.getElementById("task-formset");
+
+    let newForm = formsetDiv.children[formCount].cloneNode(true);
+    newForm.innerHTML = newForm.innerHTML.replace(/-0-/g, `-${formCount}-`);
+
+    formsetDiv.appendChild(newForm);
+    totalForms.value = formCount + 1;
+  });
+</script>
+
+{% endblock content %}
