@@ -15,7 +15,7 @@
 <body>
   <!-- nav bar -->
   <div>
-    <nav class="bg-white fixed w-full z-20 top-0 start-0 border-b border-gray-200">
+    <nav class="bg-white fixed w-full z-20 top-0 start-0 border-b border-gray-800">
       <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
         <a href="{% url '' %}" class="flex items-center space-x-3 rtl:space-x-reverse">
           <img src="https://img.icons8.com/?size=100&id=aGjJAglHRMgP&format=png&color=000000" class="h-8"
@@ -27,9 +27,9 @@
 
         <div class="flex md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
           <button
-            class="mt-2 relative inline-flex items-center justify-center p-0.5 mb-2 me-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-purple-600 to-blue-500 group-hover:from-purple-600 group-hover:to-blue-500 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800">
+            class="mt-2 relative inline-flex items-center justify-center p-0.5 mb-2 me-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-purple-600 to-blue-500 group-hover:from-purple-600 group-hover:to-blue-500 hover:text-white dark:text-dark focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800">
             <a href="{% url 'logout' %}"
-              class="relative px-5 py-2.5 transition-all ease-in duration-75 bg-white rounded-md dark:bg-white">
+              class="relative px-5 py-2.5 transition-all ease-in duration-75 bg-white rounded-md group-hover:bg-transparent">
               Log Out
             </a>
           </button>
@@ -39,9 +39,9 @@
 
         <div class="flex md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
           <button
-            class="mt-2 relative inline-flex items-center justify-center p-0.5 mb-2 me-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-purple-600 to-blue-500 group-hover:from-purple-600 group-hover:to-blue-500 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800">
+            class="mt-2 relative inline-flex items-center justify-center p-0.5 mb-2 me-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-purple-600 to-blue-500 group-hover:from-purple-600 group-hover:to-blue-500 hover:text-white dark:text-dark focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800">
             <a href="{% url 'login' %}"
-              class="relative px-5 py-2.5 transition-all ease-in duration-75 bg-white rounded-md dark:bg-white">
+              class="relative px-5 py-2.5 transition-all ease-in duration-75 bg-white rounded-md dark:bg-white group-hover:bg-transparent">
               Login
             </a>
           </button>

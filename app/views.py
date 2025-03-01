@@ -45,14 +45,14 @@ def login_user(request):
             user = authenticate(request, username=username, password=password)
             if user is not None:
                 auth.login(request, user)
-                return redirect("dashboard")
+                return redirect("")
     return render(request, "app/login.html", context={"form": form})
 
 
 @login_required(login_url="login")
 def dashboard(request):
-    todos = Todo.objects.all()
-    return render(request, "app/dashboard.html", context={"todo": todos})
+    my_todos = Todo.objects.all()
+    return render(request, "app/dashboard.html", context={"todos": my_todos})
 
 
 # create todo

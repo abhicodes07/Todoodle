@@ -1,0 +1,122 @@
+{% extends "app/layout.html" %}
+{% load static %}
+
+{% block content %}
+
+<script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
+
+<div
+  class=" flex items-center justify-between min-h-screen pt-16 max-w-screen bg-white border border-gray-200 rounded-lg shadow-sm dark:bg-gray-800 dark:border-gray-700">
+  <a href="{% url 'dashboard' %}">
+    <img class="rounded-t-lg"
+      src="https://images.unsplash.com/photo-1452392450884-d5fd51464e09?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+      alt="" />
+  </a>
+
+  <div class="p-5">
+    <div>
+      <a href="#">
+        <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Noteworthy technology
+          acquisitions 2021</h5>
+      </a>
+      <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">Here are the biggest enterprise technology
+        acquisitions
+        of 2021 so far, in reverse chronological order.</p>
+    </div>
+
+    <div class="flex mb-2 text-xl font-bold tracking-tight text-gray-900 dark:text-white">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
+        class="size-6">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25H12" />
+      </svg>
+      <h5 class="px-2">
+        <b>Tasks</b>
+      </h5>
+    </div>
+    <hr>
+
+    <div x-data="{ startY: 0, scrollTop: 0 }"
+      @touchstart="startY = $event.touches[0].clientY; scrollTop = $refs.list.scrollTop"
+      @touchmove="let moveY = $event.touches[0].clientY; $refs.list.scrollTop = scrollTop + (startY - moveY)"
+      class="overflow-y-auto h-80 pt-2 pb-2 px-5 scrollbar-hide rounded-md" x-ref="list"
+      style="scroll-behavior: smooth; scrollbar-width: none;">
+
+      <ul class="my-4 space-y-3">
+        <li>
+          <a href="#"
+            class="flex items-center p-3 text-base font-bold text-gray-900 rounded-lg bg-gray-50 hover:bg-gray-100 group hover:shadow dark:bg-gray-600 dark:hover:bg-gray-500 dark:text-white">
+            <span class="flex-1 ms-3 whitespace-nowrap">MetaMask</span>
+            <span
+              class="inline-flex items-center justify-center px-2 py-0.5 ms-3 text-xs font-medium text-gray-500 bg-gray-200 rounded-sm dark:bg-gray-700 dark:text-gray-400">Popular</span>
+          </a>
+        </li>
+        <li>
+          <a href="#"
+            class="flex items-center p-3 text-base font-bold text-gray-900 rounded-lg bg-gray-50 hover:bg-gray-100 group hover:shadow dark:bg-gray-600 dark:hover:bg-gray-500 dark:text-white">
+            <span class="flex-1 ms-3 whitespace-nowrap">Coinbase Wallet</span>
+          </a>
+        </li>
+        <li>
+          <a href="#"
+            class="flex items-center p-3 text-base font-bold text-gray-900 rounded-lg bg-gray-50 hover:bg-gray-100 group hover:shadow dark:bg-gray-600 dark:hover:bg-gray-500 dark:text-white">
+            <span class="flex-1 ms-3 whitespace-nowrap">Opera Wallet</span>
+          </a>
+        </li>
+        <li>
+          <a href="#"
+            class="flex items-center p-3 text-base font-bold text-gray-900 rounded-lg bg-gray-50 hover:bg-gray-100 group hover:shadow dark:bg-gray-600 dark:hover:bg-gray-500 dark:text-white">
+            <span class="flex-1 ms-3 whitespace-nowrap">WalletConnect</span>
+          </a>
+        </li>
+        <li>
+          <a href="#"
+            class="flex items-center p-3 text-base font-bold text-gray-900 rounded-lg bg-gray-50 hover:bg-gray-100 group hover:shadow dark:bg-gray-600 dark:hover:bg-gray-500 dark:text-white">
+            <span class="flex-1 ms-3 whitespace-nowrap">Fortmatic</span>
+          </a>
+        </li>
+        <li>
+          <a href="#"
+            class="flex items-center p-3 text-base font-bold text-gray-900 rounded-lg bg-gray-50 hover:bg-gray-100 group hover:shadow dark:bg-gray-600 dark:hover:bg-gray-500 dark:text-white">
+            <span class="flex-1 ms-3 whitespace-nowrap">Fortmatic</span>
+          </a>
+        </li>
+        <li>
+          <a href="#"
+            class="flex items-center p-3 text-base font-bold text-gray-900 rounded-lg bg-gray-50 hover:bg-gray-100 group hover:shadow dark:bg-gray-600 dark:hover:bg-gray-500 dark:text-white">
+            <span class="flex-1 ms-3 whitespace-nowrap">Fortmatic</span>
+          </a>
+        </li>
+        <li>
+          <a href="#"
+            class="flex items-center p-3 text-base font-bold text-gray-900 rounded-lg bg-gray-50 hover:bg-gray-100 group hover:shadow dark:bg-gray-600 dark:hover:bg-gray-500 dark:text-white">
+            <span class="flex-1 ms-3 whitespace-nowrap">Fortmatic</span>
+          </a>
+        </li>
+      </ul>
+    </div>
+
+    <div class="pt-5">
+      <button
+        class="relative inline-flex items-center justify-center p-0.5 mb-2 me-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-purple-500 to-pink-500 group-hover:from-purple-500 group-hover:to-pink-500 hover:text-white dark:text-white focus:ring-4 focus:outline-none focus:ring-purple-200 dark:focus:ring-purple-800">
+        <span
+          class="relative px-5 py-2.5 transition-all ease-in duration-75 bg-white dark:bg-gray-800 rounded-md group-hover:bg-transparent group-hover:dark:bg-transparent">
+          Edit Todo
+        </span>
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- {% for t in todos %} -->
+<!-- <section class="flex items-center justify-center h-screen"> -->
+<!--   <div> -->
+<!--     <p id="text" class="text-2xl text-center"> -->
+<!--       {{ t.title }} -->
+<!--       {{ t.author }} -->
+<!--       {{ t.description }} -->
+<!--     </p> -->
+<!--   </div> -->
+<!-- </section> -->
+<!-- {% endfor %} -->
+
+{% endblock content %}
