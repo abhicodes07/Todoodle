@@ -2,20 +2,20 @@
 {% load static %}
 
 {% block content %}
-<div class="flex items-center justify-between min-h-screen">
+<div class="flex items-center justify-between">
   <div class="w-1/2 flex justify-end text-left px-8">
     <p class="text-7xl whitespace-pre-line">
       &nbsp;
-      Welcome to the todoodle app!
-      {% if user.is_authenticated %}<b>{{ user }}! </b>{% endif %}
+      Welcome to the todoodle app
+      {% if user.is_authenticated %}<b>{{ user }}! </b> {% else %} ! {% endif %}
     </p>
   </div>
 
   <!-- Divider (Vertical Ruler) -->
-  <div class="w-10 border-l border-gray-700 h-64"></div>
+  <div class="w-10 border-l border-gray-700 h-80 mt-32"></div>
 
   <!-- Left Section (Button or Extra Content) -->
-  <div class="w-1/2 justify-center">
+  <div class="w-1/2 justify-center mt-24">
     <p>Start creating todo's to streamline your day, so you can focus on what matters most—getting stuff done!</p>
     {% if not user.is_authenticated %}
     <button

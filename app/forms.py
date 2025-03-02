@@ -68,7 +68,7 @@ class TodoForm(forms.ModelForm):
     title = forms.CharField(
         widget=TextInput(
             attrs={
-                "class": "w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all",
+                "class": "w-full p-3 border text-white border-white rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all bg-transparent placeholder-gray-500",
                 "placeholder": "Enter title of todo",
             }
         )
@@ -77,7 +77,7 @@ class TodoForm(forms.ModelForm):
     description = forms.CharField(
         widget=TextInput(
             attrs={
-                "class": "w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all",
+                "class": "w-full p-3 border text-white border-white rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-blue-500 transition-all bg-transparent placeholder-gray-500",
                 "placeholder": "Enter description",
             }
         ),
@@ -88,7 +88,7 @@ class TodoForm(forms.ModelForm):
         required=False,
         widget=ClearableFileInput(
             attrs={
-                "class": "block w-full p-3 text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500",
+                "class": "block w-full p-3 text-sm text-white border border-white rounded-lg cursor-pointer bg-transparent focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all placeholder-gray-500",
                 "accept": "image/*",  # accept only image file
             }
         ),
@@ -108,7 +108,7 @@ class TaskForm(forms.ModelForm):
     title = forms.CharField(
         widget=TextInput(
             attrs={
-                "class": "w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all",
+                "class": "flex w-full p-3 border-4 text-white border-white rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-blue-500 transition-all bg-transparent placeholder-gray-700",
                 "placeholder": "Enter title of task",
             }
         )
@@ -120,4 +120,4 @@ class TaskForm(forms.ModelForm):
 
 
 # Formset to handle multiple tasks linked to a Todo
-TaskFromSet = inlineformset_factory(Todo, Task, form=TaskForm, extra=1)
+TaskFromSet = inlineformset_factory(Todo, Task, form=TaskForm, extra=1, can_delete=True)

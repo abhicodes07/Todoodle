@@ -2,120 +2,134 @@
 {% load static %}
 
 {% block content %}
-<form method="post" enctype="multipart/form-data">
-  {% csrf_token %}
+<section class="mt-10 min-h-screen flex items-center justify-center px-6 py-8 mx-auto bg-cover bg-center bg-no-repeat"
+  style="background-image: url('https://images.unsplash.com/photo-1620571514293-f2178438e96d?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fA%3D%3D');">
+  <div class="w-full p-8 bg-opacity-60">
 
-  {{ todo_form.as_p }}
+    <form class="grid grid-cols-2 gap-10 m-4 space-y-6" method="POST" autocomplete="off">
+      {% csrf_token %}
 
-  <h3>Tasks:</h3>
-  <div id="task-formset">
-    {{ formset.management_form }}
-    {% for form in formset %}
-    <div class="task-form">
-      {{ form.as_p }}
-    </div>
-    {% endfor %}
-  </div>
-
-  <button type="button" id="add-task">Add Another Task</button>
-  <button type="submit">Create Todo</button>
-</form>
-
-<section class=" mt-10 min-h-screen flex items-center justify-center px-6 py-8 mx-auto bg-cover bg-center bg-no-repeat">
-  <div class="w-full bg-grey-400 p-8 bg-opacity-90">
-    <h1 class="text-2xl font-bold text-gray-900 mb-6 text-center">
-      Create a Todo
-    </h1>
-
-    <div class="grid grid-cols-2 gap-10 m-4 ">
-      <div class="border border-black p-8 rounded-xl shadow-xl">
-        <form class="space-y-6" method="POST" autocomplete="off" enctype="multipart/form-data">
-          {% csrf_token %}
-
-          <div>
-            <label for="{{ todo_form.title.id_for_label }}"
-              class="block mb-2 text-sm font-medium text-gray-900">Title</label>
-            {{ todo_form.title }}
-          </div>
-
-          <div>
-            <label for="{{ todo_form.description.id_for_label }}"
-              class="block mb-2 text-sm font-medium text-gray-900">Description</label>
-            {{ todo_form.description }}
-          </div>
-
-          <div>
-            <label for="{{ todo_form.description.id_for_label }}"
-              class="block mb-2 text-sm font-medium text-gray-900">Description</label>
-            {{ todo_form.description }}
-          </div>
-
-          <div>
-            <label for="{{ todo_form.image.id_for_label }}"
-              class="block mb-2 text-sm font-medium text-gray-900 dark:text-black">Upload
-              file</label>
-            {{ todo_form.image }}
-            <p class="mt-1 text-sm text-gray-500 dark:text-gray-500" id="file_input_help">SVG, PNG, JPG or GIF (MAX.
-              800x400px).</p>
-          </div>
-
-          <div>
-            <button
-              class="flex mt-2 relative inline-flex items-center justify-center p-0.5 mb-2 me-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-purple-600 to-blue-500 group-hover:from-purple-600 group-hover:to-blue-500 hover:text-white dark:text-dark focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800">
-              <span
-                class="relative px-5 py-2.5 transition-all ease-in duration-75 bg-white rounded-md group-hover:bg-transparent">
-                Create todo
-              </span>
-            </button>
-          </div>
-        </form>
+      <div class="border bg-black bg-opacity-60 border-white p-8 rounded-xl shadow-xl shadow-indigo-500/50">
+        <h1 class="text-3xl font-bold text-white mb-6 text-center">
+          Create a Todo
+        </h1>
+        <div class="m-2">
+          <label for="{{ todo_form.title.id_for_label }}"
+            class="block mb-2 text-sm font-medium text-white">Title</label>
+          {{ todo_form.title }}
+        </div>
+        <div class="m-2">
+          <label for="{{ todo_form.description.id_for_label }}"
+            class="block mb-2 text-sm font-medium text-white">Description</label>
+          {{ todo_form.description }}
+        </div>
+        <div class="m-2">
+          <label for="{{ todo_form.image.id_for_label }}" class="block mb-2 text-sm font-medium text-white">
+            Upload file
+          </label>
+          {{ todo_form.image }}
+          <p class="mt-1 text-sm text-gray-500 dark:text-gray-500">
+            SVG, PNG, JPG or GIF (MAX. 800x400px).
+          </p>
+        </div>
+        <button type="submit"
+          class="w-full bg-blue-600 text-white p-3 rounded-lg hover:bg-blue-700 focus:ring-4 focus:ring-blue-200 transition-all font-medium">
+          Create
+        </button>
       </div>
 
-      <div id="task-formset">
-        {{ formset.management_form }}
-        {% for form in formset %}
-        <div class="task-form">
-          <form class="space-y-6" method="POST" autocomplete="off" enctype="multipart/form-data">
-            {% csrf_token %}
-            <div>
-              <label for="{{ form.title.id_for_label }}" class="block mb-2 text-sm font-medium text-gray-900">Task
-                Title</label>
+      <div class="border bg-black bg-opacity-60 border-white p-8 rounded-xl shadow-xl shadow-purple-500/50">
+        <h1 class="text-3xl font-bold text-white mb-6 text-center">
+          Add Tasks
+        </h1>
+
+        <div id="task-formset">
+          {{ formset.management_form }}
+          {% for form in formset %}
+          <div class="task-form">
+            <div class="bg-opacity-60 rounded-lg mt-2">
+              <div class=" remove flex">
+                <label for="{{ todo_form.title.id_for_label }}" id="task-label"
+                  class="block mb-2 text-sm font-medium text-white">Title</label>
+              </div>
               {{ form.title }}
             </div>
-            <div>
-              {{ form.completed }}
-            </div>
-            <div class="flex justify-end">
-              <button
-                class="flex mt-2 relative inline-flex items-center justify-center p-0.5 mb-2 me-2 overflow-hidden text-sm font-medium text-gray-900 rounded-lg group bg-gradient-to-br from-purple-600 to-blue-500 group-hover:from-purple-600 group-hover:to-blue-500 hover:text-white dark:text-dark focus:ring-4 focus:outline-none focus:ring-blue-300 dark:focus:ring-blue-800">
-                <span
-                  class="relative px-5 py-2.5 transition-all ease-in duration-75 bg-white rounded-md group-hover:bg-transparent">
-                  Add task
-                </span>
-              </button>
-            </div>
-          </form>
+          </div>
+          {% endfor %}
         </div>
-        {% endfor %}
-      </div>
 
-    </div>
+        <!-- Keep the "Add Task" button OUTSIDE the formset to avoid duplication -->
+        <div class="flex justify-end mt-4">
+          <button type="button" id="add-task"
+            class="text-purple-700 hover:text-white border border-purple-700 hover:bg-purple-800 focus:ring-4 focus:outline-none focus:ring-purple-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2 dark:border-purple-400 dark:text-purple-400 dark:hover:text-white dark:hover:bg-purple-500 dark:focus:ring-purple-900">Add
+            task</button>
+        </div>
+      </div>
+    </form>
   </div>
 </section>
 
 <script>
   document.getElementById("add-task").addEventListener("click", function () {
-    let totalForms = document.querySelector("#id_tasks-TOTAL_FORMS");
-    let formCount = Number(totalForms.value);
     let formsetDiv = document.getElementById("task-formset");
+    let totalForms = document.querySelector("[name$='TOTAL_FORMS']");
+    let formCount = Number(totalForms.value);
 
-    let newForm = formsetDiv.children[formCount].cloneNode(true);
-    newForm.innerHTML = newForm.innerHTML.replace(/-0-/g, `-${formCount}-`);
+    let firstForm = formsetDiv.querySelector(".task-form");
+    if (!firstForm) return; // Prevent errors if no initial forms
 
+    let newForm = firstForm.cloneNode(true);
+
+    // Update the name attributes and IDs for new form fields
+    newForm.innerHTML = newForm.innerHTML.replace(
+      new RegExp(`tasks-\\d+`, "g"),
+      `tasks-${formCount}`
+    );
+
+    // Clear values from cloned form
+    newForm.querySelectorAll("input, textarea, select").forEach((input) => {
+      if (input.type !== "checkbox") {
+        input.value = "";
+      } else {
+        input.checked = false;
+      }
+    });
+
+    // Add Remove Button if it doesn't exist
+    let removeBtn = document.createElement("button");
+    removeBtn.type = "button";
+    removeBtn.className = "remove-task absolute mt-8 top-2 right-2 bg-red-600 text-white px-2 py-1 rounded text-xs";
+    removeBtn.innerText = "Remove";
+    removeBtn.addEventListener("click", function () {
+      removeTask(newForm);
+    });
+
+    newForm.appendChild(removeBtn);
+    newForm.classList.add("relative");
+
+    // Append the new form **before** the "Add Task" button
     formsetDiv.appendChild(newForm);
     totalForms.value = formCount + 1;
   });
-</script>
 
-<script src="https://cdn.jsdelivr.net/npm/flowbite@3.1.2/dist/flowbite.min.js"></script>
+  // Function to remove a task
+  function removeTask(taskDiv) {
+    let formsetDiv = document.getElementById("task-formset");
+    let totalForms = document.querySelector("#id_tasks-TOTAL_FORMS");
+
+    if (formsetDiv.querySelectorAll(".task-form").length > 1) {
+      taskDiv.remove();
+      totalForms.value = Number(totalForms.value) - 1;
+    } else {
+      alert("You must have at least one task!");
+    }
+  }
+
+  // Attach event listeners to existing remove buttons
+  document.querySelectorAll(".remove-task").forEach(button => {
+    button.addEventListener("click", function () {
+      removeTask(button.closest(".task-form"));
+    });
+  });
+</script>
 {% endblock content %}

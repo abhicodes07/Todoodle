@@ -66,14 +66,19 @@ def create_todo(request):
         formset = TaskFromSet(request.POST)
 
         if todo_form.is_valid() and formset.is_valid():
-            todo = todo_form.save()  # save the todo first
+            # save the todo first
+            todo = todo_form.save(commit=False)  # prevent immediate DB save
+            todo.save()  # explicitly save todo
+
             tasks = formset.save(commit=False)  # get task instances but don't save yet
 
             for task in tasks:
-                task.todo = todo  # link task to created todo
-                task.save()
+                # prevent empty tasks from being saved
+                if task.title.strip():
+                    task.todo = todo  # link task to created todo
+                    task.save()
 
-        return redirect("dashboard")
+            return redirect("dashboard")
     return render(
         request, "app/create_todo.html", {"todo_form": todo_form, "formset": formset}
     )
