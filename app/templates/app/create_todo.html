@@ -4,9 +4,9 @@
 {% block content %}
 <section class="mt-10 min-h-screen flex items-center justify-center px-6 py-8 mx-auto bg-cover bg-center bg-no-repeat"
   style="background-image: url('https://images.unsplash.com/photo-1620571514293-f2178438e96d?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fA%3D%3D');">
-  <div class="w-full p-8 bg-opacity-60">
+  <div class="w-full p-8 bg-opacity-60 bg-transparent">
 
-    <form class="grid grid-cols-2 gap-10 m-4 space-y-6" method="POST" autocomplete="off">
+    <form class="grid grid-cols-2 gap-10 m-4 space-y-6" method="POST" autocomplete="off" enctype="multipart/form-data">
       {% csrf_token %}
 
       <div class="border bg-black bg-opacity-60 border-white p-8 rounded-xl shadow-xl shadow-indigo-500/50">
@@ -39,9 +39,13 @@
       </div>
 
       <div class="border bg-black bg-opacity-60 border-white p-8 rounded-xl shadow-xl shadow-purple-500/50">
-        <h1 class="text-3xl font-bold text-white mb-6 text-center">
-          Add Tasks
-        </h1>
+
+        <!-- Keep the "Add Task" button OUTSIDE the formset to avoid duplication -->
+        <div class="flex justify-end mt-4">
+          <button type="button" id="add-task"
+            class="text-purple-700 hover:text-white border border-purple-700 hover:bg-purple-800 focus:ring-4 focus:outline-none focus:ring-purple-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2 dark:border-purple-400 dark:text-purple-400 dark:hover:text-white dark:hover:bg-purple-500 dark:focus:ring-purple-900">Add
+            task</button>
+        </div>
 
         <div id="task-formset">
           {{ formset.management_form }}
@@ -57,14 +61,8 @@
           </div>
           {% endfor %}
         </div>
-
-        <!-- Keep the "Add Task" button OUTSIDE the formset to avoid duplication -->
-        <div class="flex justify-end mt-4">
-          <button type="button" id="add-task"
-            class="text-purple-700 hover:text-white border border-purple-700 hover:bg-purple-800 focus:ring-4 focus:outline-none focus:ring-purple-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2 dark:border-purple-400 dark:text-purple-400 dark:hover:text-white dark:hover:bg-purple-500 dark:focus:ring-purple-900">Add
-            task</button>
-        </div>
       </div>
+
     </form>
   </div>
 </section>

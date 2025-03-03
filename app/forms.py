@@ -68,7 +68,7 @@ class TodoForm(forms.ModelForm):
     title = forms.CharField(
         widget=TextInput(
             attrs={
-                "class": "w-full p-3 border text-white border-white rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all bg-transparent placeholder-gray-500",
+                "class": "w-full p-3 border text-white border-white rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-blue-500 transition-all bg-transparent placeholder-gray-500",
                 "placeholder": "Enter title of todo",
             }
         )
@@ -77,7 +77,7 @@ class TodoForm(forms.ModelForm):
     description = forms.CharField(
         widget=TextInput(
             attrs={
-                "class": "w-full p-3 border text-white border-white rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-blue-500 transition-all bg-transparent placeholder-gray-500",
+                "class": "w-full p-3 border border-white text-white rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-blue-500 transition-all bg-transparent placeholder-gray-500",
                 "placeholder": "Enter description",
             }
         ),
@@ -108,7 +108,7 @@ class TaskForm(forms.ModelForm):
     title = forms.CharField(
         widget=TextInput(
             attrs={
-                "class": "flex w-full p-3 border-4 text-white border-white rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-blue-500 transition-all bg-transparent placeholder-gray-700",
+                "class": "flex w-full p-3 border-4 border-white text-white rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-blue-500 transition-all bg-transparent placeholder-gray-700",
                 "placeholder": "Enter title of task",
             }
         )

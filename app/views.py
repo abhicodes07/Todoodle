@@ -3,6 +3,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import auth
 from django.forms import Form
 from django.shortcuts import redirect, render, get_object_or_404
+from django.db import models
 
 from app.models import Task, Todo
 
@@ -51,7 +52,9 @@ def login_user(request):
 
 @login_required(login_url="login")
 def dashboard(request):
-    my_todos = Todo.objects.filter(user=request.user)
+    my_todos = Todo.objects.filter(user=request.user).annotate(
+        task_count=models.Count("tasks")
+    )
     return render(request, "app/dashboard.html", context={"todos": my_todos})
 
 
@@ -68,6 +71,7 @@ def create_todo(request):
         if todo_form.is_valid() and formset.is_valid():
             # save the todo first
             todo = todo_form.save(commit=False)  # prevent immediate DB save
+            todo.user = request.user  # assign the todo to the logged in user
             todo.save()  # explicitly save todo
 
             tasks = formset.save(commit=False)  # get task instances but don't save yet
