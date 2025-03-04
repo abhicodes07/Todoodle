@@ -1,0 +1,144 @@
+{% extends "app/layout.html" %}
+{% load static %}
+
+{% block content %}
+<section class="mt-10 min-h-screen flex items-center justify-center px-6 py-8 mx-auto bg-cover bg-center bg-no-repeat"
+  style="background-image: url('https://images.unsplash.com/photo-1620571514293-f2178438e96d?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fA%3D%3D');">
+  <div class="w-full p-8 bg-opacity-60 bg-transparent">
+
+    <form class="grid grid-cols-2 gap-10 m-4 space-y-6" method="POST" autocomplete="off" enctype="multipart/form-data">
+      {% csrf_token %}
+      <div class="border bg-black bg-opacity-60 border-white p-8 rounded-xl shadow-xl shadow-indigo-500/50">
+        <h1 class="text-3xl font-bold text-white mb-6 text-center">
+          Create a Todo
+        </h1>
+        <div class="m-2">
+          <label for="{{ update_todo_form.title.id_for_label }}"
+            class="block mb-2 text-sm font-medium text-white">Title</label>
+          {{ update_todo_form.title }}
+        </div>
+        <div class="m-2">
+          <label for="{{ update_todo_form.description.id_for_label }}"
+            class="block mb-2 text-sm font-medium text-white">Description</label>
+          {{ update_todo_form.description }}
+        </div>
+        <div class="m-2">
+          <label for="{{ update_todo_form.image.id_for_label }}" class="block mb-2 text-sm font-medium text-white">
+            Upload file
+          </label>
+          {{ update_todo_form.image }}
+          <p class="mt-1 text-sm text-gray-500 dark:text-gray-500">
+            SVG, PNG, JPG or GIF (MAX. 800x400px).
+          </p>
+        </div>
+        <button type="submit"
+          class="w-full bg-blue-600 text-white p-3 rounded-lg hover:bg-blue-700 focus:ring-4 focus:ring-blue-200 transition-all font-medium">
+          Update
+        </button>
+      </div>
+
+      <div class="border bg-black bg-opacity-60 border-white p-8 rounded-xl shadow-xl shadow-purple-500/50">
+
+        <!-- Keep the "Add Task" button OUTSIDE the formset to avoid duplication -->
+        <div class="flex justify-end mt-4">
+          <button type="button" id="add-task"
+            class="text-purple-700 hover:text-white border border-purple-700 hover:bg-purple-800 focus:ring-4 focus:outline-none focus:ring-purple-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2 dark:border-purple-400 dark:text-purple-400 dark:hover:text-white dark:hover:bg-purple-500 dark:focus:ring-purple-900">Add
+            task</button>
+        </div>
+
+        <div id="task-formset">
+          {{ update_formset.management_form }}
+          {% for form in update_formset %}
+          <div class="task-form">
+            <div class="bg-opacity-60 rounded-lg mt-2">
+              <div class=" remove flex">
+                <label for="{{ form.title.id_for_label }}" id="task-label"
+                  class="block mb-2 text-sm font-medium text-white">Title</label>
+              </div>
+              {{ form.id }}
+              {{ form.title }}
+              <div class="flex">
+                <span class="flex mx-2">
+                  <label for="{{ form.completed.id_for_label }}" id="task-label"
+                    class="block mb-2 text-sm font-medium text-white">Complete</label>
+                  {{ form.completed }}
+                </span>
+                <span class="flex">
+                  <label for="{{ form.DELETE.id_for_label }}" id="task-label"
+                    class="block mb-2 text-sm font-medium text-white">Delete</label>
+                  {{ form.DELETE }}
+                </span>
+              </div>
+            </div>
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+    </form>
+  </div>
+</section>
+
+<script>
+  document.getElementById("add-task").addEventListener("click", function () {
+    let formsetDiv = document.getElementById("task-formset");
+    let totalForms = document.querySelector("[name$='TOTAL_FORMS']");
+    let formCount = Number(totalForms.value);
+
+    let firstForm = formsetDiv.querySelector(".task-form");
+    if (!firstForm) return; // Prevent errors if no initial forms
+
+    let newForm = firstForm.cloneNode(true);
+
+    // Update the name attributes and IDs for new form fields
+    newForm.innerHTML = newForm.innerHTML.replace(
+      new RegExp(`tasks-\\d+`, "g"),
+      `tasks-${formCount}`
+    );
+
+    // Clear values from cloned form
+    newForm.querySelectorAll("input, textarea, select").forEach((input) => {
+      if (input.type !== "checkbox") {
+        input.value = "";
+      } else {
+        input.checked = false;
+      }
+    });
+
+    // Add Remove Button if it doesn't exist
+    let removeBtn = document.createElement("button");
+    removeBtn.type = "button";
+    removeBtn.className = "remove-task absolute mt-8 top-2 right-2 bg-red-600 text-white px-2 py-1 rounded text-xs";
+    removeBtn.innerText = "Remove";
+    removeBtn.addEventListener("click", function () {
+      removeTask(newForm);
+    });
+
+    newForm.appendChild(removeBtn);
+    newForm.classList.add("relative");
+
+    // Append the new form **before** the "Add Task" button
+    formsetDiv.appendChild(newForm);
+    totalForms.value = formCount + 1;
+  });
+
+  // Function to remove a task
+  function removeTask(taskDiv) {
+    let formsetDiv = document.getElementById("task-formset");
+    let totalForms = document.querySelector("#id_tasks-TOTAL_FORMS");
+
+    if (formsetDiv.querySelectorAll(".task-form").length > 1) {
+      taskDiv.remove();
+      totalForms.value = Number(totalForms.value) - 1;
+    } else {
+      alert("You must have at least one task!");
+    }
+  }
+
+  // Attach event listeners to existing remove buttons
+  document.querySelectorAll(".remove-task").forEach(button => {
+    button.addEventListener("click", function () {
+      removeTask(button.closest(".task-form"));
+    });
+  });
+</script>
+{% endblock content %}
