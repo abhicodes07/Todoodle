@@ -124,6 +124,14 @@ def update_todo(request, pk):
     )
 
 
+# delete todo
+@login_required(login_url="login")
+def delete_todo(request, pk):
+    todo = get_object_or_404(Todo, user=request.user, id=pk)
+    todo.delete()
+    return redirect("dashboard")
+
+
 # user logout
 def logout_user(request):
     auth.logout(request)

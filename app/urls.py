@@ -10,4 +10,5 @@ urlpatterns = [
     path("dashboard/", views.dashboard, name="dashboard"),
     path("todo/", views.create_todo, name="todo"),
     path("update/<int:pk>/", views.update_todo, name="update"),
+    path("delete/<int:pk>/", views.delete_todo, name="delete"),
 ]
